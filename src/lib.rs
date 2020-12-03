@@ -53,11 +53,13 @@ impl Store {
         }
     }
 
+    #[inline]
     ///Accesses inner representation of storage, allowing to serialize it.
     pub fn inner(&self) -> &BTreeMap<u128, Vec<u8>> {
         &self.inner
     }
 
+    #[inline]
     ///Consumes self, returning underlying storage.
     pub fn into_inner(self) -> BTreeMap<u128, Vec<u8>> {
         self.inner
