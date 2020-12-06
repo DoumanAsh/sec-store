@@ -19,4 +19,4 @@ version = "0.8"
 features = ["xxh3"]
 
 [dependencies.ring]
-version = "0.17.0-alpha.7"
+version = "0.17.0-alpha.8"
