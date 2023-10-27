@@ -43,7 +43,7 @@ impl Manager {
         Aad::empty()
     }
 
-    pub fn encrypt<'a>(&self, nonce: u128, in_out: &'a mut Vec<u8>) -> bool {
+    pub fn encrypt(&self, nonce: u128, in_out: &'_ mut Vec<u8>) -> bool {
         let key = match UnboundKey::new(&CHACHA20_POLY1305, &self.key) {
             Ok(key) => LessSafeKey::new(key),
             Err(_) => return false,
