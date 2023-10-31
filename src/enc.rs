@@ -7,9 +7,9 @@ pub fn generate_key(salt: &[u8], pass: &[u8]) -> [u8; 32] {
         NonZeroU32::new_unchecked(1_000)
     };
 
-    use ring::pbkdf2::{self, PBKDF2_HMAC_SHA512};
+    use ring::pbkdf2::{self, PBKDF2_HMAC_SHA256};
     let mut out = [0u8; 32];
-    pbkdf2::derive(PBKDF2_HMAC_SHA512, IT, salt, pass, &mut out);
+    pbkdf2::derive(PBKDF2_HMAC_SHA256, IT, salt, pass, &mut out);
 
     out
 }
