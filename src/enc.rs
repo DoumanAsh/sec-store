@@ -62,7 +62,6 @@ impl Manager {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -89,5 +88,15 @@ mod tests {
         assert_eq!(result, TEXT);
         assert!(manager.decrypt(2, &mut value).is_none());
         assert!(manager2.decrypt(1, &mut value).is_none());
+    }
+
+    #[test]
+    fn should_generate_key() {
+        const SALT: &[u8] = b"whatever";
+        const SECRET: &[u8] = b"lolka";
+        const EXPECTED: [u8; 32] = [34, 79, 27, 145, 83, 82, 114, 216, 70, 67, 209, 212, 17, 228, 185, 70, 179, 194, 204, 86, 165, 73, 198, 128, 133, 50, 77, 26, 100, 7, 210, 250];
+
+        let result = generate_key(SALT, SECRET);
+        assert_eq!(result, EXPECTED);
     }
 }
