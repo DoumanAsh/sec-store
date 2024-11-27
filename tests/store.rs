@@ -11,7 +11,9 @@ fn should_securely_manage_values() {
     let mut store = Store::new(USER, PASS);
 
     assert_eq!(store.len(), 0);
+    assert!(!store.contains(b"1"));
     assert!(store.insert(b"1", PASS).is_none());
+    assert!(store.contains(b"1"));
     assert_eq!(store.len(), 1);
     assert_eq!(store.get(b"1").unwrap(), PASS);
     assert_eq!(store.get_to(b"1", &mut bytes).unwrap(), PASS.len());
@@ -52,6 +54,7 @@ fn should_securely_manage_values() {
     let store = store.into_inner();
     let mut store = Store::from_inner(store, b"WRONG", PASS);
 
+    assert!(store.contains(b"1"));
     assert!(store.get(b"1").is_none());
     assert!(store.get_to(b"1", &mut bytes).is_err());
     assert!(store.remove_to(b"1", &mut bytes).is_err());

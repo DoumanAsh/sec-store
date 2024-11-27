@@ -148,6 +148,14 @@ impl Store {
         }
     }
 
+    #[inline]
+    ///Checks for `key` presence within storage
+    pub fn contains(&self, key: &[u8]) -> bool {
+        let key = xxh3_128(key).to_le();
+
+        self.inner().contains_key(&key)
+    }
+
     ///Inserts new owned `value` for `key`, returning previous one, if any.
     pub fn insert_owned(&mut self, key: &[u8], mut value: Vec<u8>) -> Option<Vec<u8>> {
         assert_ne!(value.len(), 0);
